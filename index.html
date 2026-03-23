@@ -1,86 +1,252 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cash Calculator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <div class="page-shell">
+    <div class="mesh mesh-one"></div>
+    <div class="mesh mesh-two"></div>
+    <div class="mesh mesh-three"></div>
 
-    <div class="container">
+    <main class="app-shell">
+      <section class="hero-panel">
+        <p class="eyebrow">Cash Counter Studio</p>
         <h1>Cash Calculator</h1>
-        
-        <div class="row">
-          <img src="images/two_thousand_note.png"></img>
-          <input type="number" id="et2000" class="cash-input" placeholder="Enter No. of Rs.2000 Notes">
-          <span id="txt2000" class="cash-text">0</span>
+        <p class="hero-copy">
+          Count every denomination in one screen. The dashboard updates instantly,
+          highlights active notes, and converts the final amount into words for you.
+        </p>
+
+        <div class="hero-stats">
+          <article class="stat-card">
+            <span class="stat-label">Grand Total</span>
+            <strong id="heroTotal">Rs. 0</strong>
+          </article>
+          <article class="stat-card">
+            <span class="stat-label">Total Notes</span>
+            <strong id="heroNotes">0</strong>
+          </article>
+          <article class="stat-card">
+            <span class="stat-label">Active Values</span>
+            <strong id="activeDenominations">0/10</strong>
+          </article>
         </div>
 
-        <div class="row">
-          <img src="images/five_hundred_note.png"></img>
-          <input type="number" id="et500" class="cash-input" placeholder="Enter No. of Rs.500 Notes">
-          <span id="txt500" class="cash-text">0</span>
+        <div class="hero-tip">
+          <span class="tip-dot"></span>
+          Auto-updates while you type
         </div>
-        <div class="row">
-          <img src="images/two_hundred_note.png"></img>
-          <input type="number" id="et200" class="cash-input" placeholder="Enter No. of Rs.200 Notes">
-          <span id="txt200" class="cash-text">0</span>
-        </div>
+      </section>
 
-        <div class="row">
-          <img src="images/one_hundred.png"></img>
-          <input type="number" id="et100" class="cash-input" placeholder="Enter No. of Rs.100 Notes">
-          <span id="txt100" class="cash-text">0</span>
+      <section class="calculator-panel">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">Live Breakdown</p>
+            <h2>Enter your note counts</h2>
+          </div>
+          <button id="btnReset" type="button">Reset</button>
         </div>
 
-        <div class="row">
-          <img src="images/fifty_note.png"></img>
-          <input type="number" id="et50" class="cash-input" placeholder="Enter No. of Rs.50 Notes">
-          <span id="txt50" class="cash-text">0</span>
+        <div class="cash-grid">
+          <article class="note-card" data-denomination="2000" style="--delay: 0;">
+            <div class="note-visual">
+              <img src="images/two_thousand_note.png" alt="Rs. 2000 note">
+              <div>
+                <p class="note-label">Rs. 2000</p>
+                <span class="note-caption">High-value note</span>
+              </div>
+            </div>
+            <label class="count-field" for="et2000">
+              <span class="field-label">Count</span>
+              <input type="number" id="et2000" class="cash-input" min="0" inputmode="numeric" placeholder="0">
+            </label>
+            <div class="note-total">
+              <span class="field-label">Amount</span>
+              <span id="txt2000" class="cash-text">Rs. 0</span>
+            </div>
+          </article>
+
+          <article class="note-card" data-denomination="500" style="--delay: 1;">
+            <div class="note-visual">
+              <img src="images/five_hundred_note.png" alt="Rs. 500 note">
+              <div>
+                <p class="note-label">Rs. 500</p>
+                <span class="note-caption">Everyday cash stack</span>
+              </div>
+            </div>
+            <label class="count-field" for="et500">
+              <span class="field-label">Count</span>
+              <input type="number" id="et500" class="cash-input" min="0" inputmode="numeric" placeholder="0">
+            </label>
+            <div class="note-total">
+              <span class="field-label">Amount</span>
+              <span id="txt500" class="cash-text">Rs. 0</span>
+            </div>
+          </article>
+
+          <article class="note-card" data-denomination="200" style="--delay: 2;">
+            <div class="note-visual">
+              <img src="images/two_hundred_note.png" alt="Rs. 200 note">
+              <div>
+                <p class="note-label">Rs. 200</p>
+                <span class="note-caption">Useful for mixed bundles</span>
+              </div>
+            </div>
+            <label class="count-field" for="et200">
+              <span class="field-label">Count</span>
+              <input type="number" id="et200" class="cash-input" min="0" inputmode="numeric" placeholder="0">
+            </label>
+            <div class="note-total">
+              <span class="field-label">Amount</span>
+              <span id="txt200" class="cash-text">Rs. 0</span>
+            </div>
+          </article>
+
+          <article class="note-card" data-denomination="100" style="--delay: 3;">
+            <div class="note-visual">
+              <img src="images/one_hundred.png" alt="Rs. 100 note">
+              <div>
+                <p class="note-label">Rs. 100</p>
+                <span class="note-caption">Standard carry note</span>
+              </div>
+            </div>
+            <label class="count-field" for="et100">
+              <span class="field-label">Count</span>
+              <input type="number" id="et100" class="cash-input" min="0" inputmode="numeric" placeholder="0">
+            </label>
+            <div class="note-total">
+              <span class="field-label">Amount</span>
+              <span id="txt100" class="cash-text">Rs. 0</span>
+            </div>
+          </article>
+
+          <article class="note-card" data-denomination="50" style="--delay: 4;">
+            <div class="note-visual">
+              <img src="images/fifty_note.png" alt="Rs. 50 note">
+              <div>
+                <p class="note-label">Rs. 50</p>
+                <span class="note-caption">Fast-moving change</span>
+              </div>
+            </div>
+            <label class="count-field" for="et50">
+              <span class="field-label">Count</span>
+              <input type="number" id="et50" class="cash-input" min="0" inputmode="numeric" placeholder="0">
+            </label>
+            <div class="note-total">
+              <span class="field-label">Amount</span>
+              <span id="txt50" class="cash-text">Rs. 0</span>
+            </div>
+          </article>
+
+          <article class="note-card" data-denomination="20" style="--delay: 5;">
+            <div class="note-visual">
+              <img src="images/twenty_note.png" alt="Rs. 20 note">
+              <div>
+                <p class="note-label">Rs. 20</p>
+                <span class="note-caption">Pocket cash layer</span>
+              </div>
+            </div>
+            <label class="count-field" for="et20">
+              <span class="field-label">Count</span>
+              <input type="number" id="et20" class="cash-input" min="0" inputmode="numeric" placeholder="0">
+            </label>
+            <div class="note-total">
+              <span class="field-label">Amount</span>
+              <span id="txt20" class="cash-text">Rs. 0</span>
+            </div>
+          </article>
+
+          <article class="note-card" data-denomination="10" style="--delay: 6;">
+            <div class="note-visual">
+              <img src="images/ten_note.png" alt="Rs. 10 note">
+              <div>
+                <p class="note-label">Rs. 10</p>
+                <span class="note-caption">Common daily change</span>
+              </div>
+            </div>
+            <label class="count-field" for="et10">
+              <span class="field-label">Count</span>
+              <input type="number" id="et10" class="cash-input" min="0" inputmode="numeric" placeholder="0">
+            </label>
+            <div class="note-total">
+              <span class="field-label">Amount</span>
+              <span id="txt10" class="cash-text">Rs. 0</span>
+            </div>
+          </article>
+
+          <article class="note-card" data-denomination="5" style="--delay: 7;">
+            <div class="note-visual">
+              <img src="images/five_note.png" alt="Rs. 5 note">
+              <div>
+                <p class="note-label">Rs. 5</p>
+                <span class="note-caption">Small note support</span>
+              </div>
+            </div>
+            <label class="count-field" for="et5">
+              <span class="field-label">Count</span>
+              <input type="number" id="et5" class="cash-input" min="0" inputmode="numeric" placeholder="0">
+            </label>
+            <div class="note-total">
+              <span class="field-label">Amount</span>
+              <span id="txt5" class="cash-text">Rs. 0</span>
+            </div>
+          </article>
+
+          <article class="note-card" data-denomination="2" style="--delay: 8;">
+            <div class="note-visual">
+              <img src="images/two_note.png" alt="Rs. 2 note">
+              <div>
+                <p class="note-label">Rs. 2</p>
+                <span class="note-caption">Low-value tally</span>
+              </div>
+            </div>
+            <label class="count-field" for="et2">
+              <span class="field-label">Count</span>
+              <input type="number" id="et2" class="cash-input" min="0" inputmode="numeric" placeholder="0">
+            </label>
+            <div class="note-total">
+              <span class="field-label">Amount</span>
+              <span id="txt2" class="cash-text">Rs. 0</span>
+            </div>
+          </article>
+
+          <article class="note-card" data-denomination="1" style="--delay: 9;">
+            <div class="note-visual">
+              <img src="images/one_note.png" alt="Rs. 1 note">
+              <div>
+                <p class="note-label">Rs. 1</p>
+                <span class="note-caption">Final adjustment note</span>
+              </div>
+            </div>
+            <label class="count-field" for="et1">
+              <span class="field-label">Count</span>
+              <input type="number" id="et1" class="cash-input" min="0" inputmode="numeric" placeholder="0">
+            </label>
+            <div class="note-total">
+              <span class="field-label">Amount</span>
+              <span id="txt1" class="cash-text">Rs. 0</span>
+            </div>
+          </article>
         </div>
 
-        <div class="row">
-          <img src="images/twenty_note.png"></img>
-          <input type="number" id="et20" class="cash-input" placeholder="Enter No. of Rs.20 Notes">
-          <span id="txt20" class="cash-text">0</span>
+        <div class="result-part" id="resultPanel">
+          <div class="result-head">
+            <span class="result-label">Total Cash</span>
+            <span id="txtFinalCash" aria-live="polite">Rs. 0</span>
+          </div>
+          <p id="txtFinalCashInWords" aria-live="polite">In words: Zero only</p>
         </div>
+      </section>
+    </main>
+  </div>
 
-        <div class="row">
-          <img src="images/ten_note.png"></img>
-          <input type="number" id="et10" class="cash-input" placeholder="Enter No. of Rs.10 Notes">
-          <span id="txt10" class="cash-text">0</span>
-        </div>
-
-        <div class="row">
-          <img src="images/five_note.png"></img>
-          <input type="number" id="et5" class="cash-input" placeholder="Enter No. of Rs.5 Notes">
-          <span id="txt5" class="cash-text">0</span>
-        </div>
-
-        <div class="row">
-          <img src="images/two_note.png"></img>
-          <input type="number" id="et2" class="cash-input" placeholder="Enter No. of Rs.2 Notes">
-          <span id="txt2" class="cash-text">0</span>
-        </div>
-
-        <div class="row">
-          <img src="images/one_note.png"></img>
-          <input type="number" id="et1" class="cash-input" placeholder="Enter No. of Rs.1 Notes">
-          <span id="txt1" class="cash-text">0</span>
-        </div>
-
-
-
-        <div class="row">
-          <button id="btnReset">Reset</button>
-        </div>
-
-        <div class="row result-part">
-          <span id="txtFinalCash">Total Cash: 0</span>
-          <span id="txtFinalCashInWords">Zero</span>
-        </div>
-
-    </div>
-  
   <script src="script.js"></script>
 </body>
 </html>
